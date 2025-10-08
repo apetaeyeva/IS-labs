@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Погода</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(120deg, #1c1f26, #283c63);
+            color: #fff;
+            text-align: center;
+            padding: 50px;
+        }
+        form {
+            margin-bottom: 30px;
+        }
+        input {
+            padding: 10px;
+            border-radius: 8px;
+            border: none;
+            width: 250px;
+        }
+        button {
+            padding: 10px 15px;
+            border-radius: 8px;
+            border: none;
+            background-color: #3ea0ff;
+            color: white;
+            cursor: pointer;
+        }
+        .weather {
+            margin-top: 20px;
+        }
+        img {
+            width: 80px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Погода в твоём городе</h1>
+
+    <form method="get">
+        <input type="text" name="city" placeholder="Введите город">
+        <button type="submit">Показать</button>
+    </form>
+
+    {% if weather %}
+        {% if weather.error %}
+            <p>{{ weather.error }}</p>
+        {% else %}
+            <div class="weather">
+                <h2>{{ weather.city }}</h2>
+                <p>{{ weather.temp }} °C</p>
+                <p>{{ weather.description|capfirst }}</p>
+                <img src="https://openweathermap.org/img/wn/{{ weather.icon }}@2x.png" alt="icon">
+            </div>
+        {% endif %}
+    {% endif %}
+</body>
+</html>
